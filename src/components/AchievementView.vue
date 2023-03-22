@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useAchievements } from '../composables/useAchievements'
 import Achievement from '@/components/Achievement.vue'
 const achievements = useAchievements()

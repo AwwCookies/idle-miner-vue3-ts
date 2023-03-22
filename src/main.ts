@@ -9,7 +9,7 @@ import './assets/main.css'
  * @returns {string} - The URL of the image corresponding to the icon code.
  * @throws {Error} - If the icon code is missing or not in a valid format.
  */
-export function getImageFromIconCode(iconCode: string) {
+export function getImageFromIconCode(iconCode: string): string {
     if (!iconCode) {
         const error = new Error("Icon code is required. Please provide a valid icon code.");
         error.stack = new Error().stack;
@@ -32,7 +32,7 @@ export function getImageFromIconCode(iconCode: string) {
  * @param {string} string - The string to modify.
  * @returns {string} - The modified string with icon codes replaced by <img> tags.
  */
-function replaceIcons(string: string) {
+function replaceIcons(string: string): string {
     return string.replace(/(\w+:\w+)/g, (match) => {
         return `<img src="${getImageFromIconCode(match)}" alt="${match}">`;
     });

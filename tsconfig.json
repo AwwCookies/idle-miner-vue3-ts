@@ -6,6 +6,9 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
   },
 
   "references": [

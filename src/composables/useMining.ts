@@ -6,6 +6,8 @@ import { useGold } from './useGold';
 import { useStats } from './useStats';
 import { useLogs } from './useLogs';
 
+import type { Item } from '@/items/items'
+
 const { add, remove } = useInventory()
 const gold = useGold()
 const { stats, addStat, addNode, updateStat, getStat } = useStats()
@@ -42,7 +44,7 @@ export default function useMining() {
                         dropTables.common                              // 49% chance of getting a common item
 
             // Select a random item from the current drop table, based on the item's drop chance and the player's luck
-            const drop = dropTable.find((item) => Math.random() < item.chance * (getStat('general', 'luck') + 1) / 100)
+            const drop = dropTable.find((item: Item) => Math.random() < item.chance * (getStat('general', 'luck') + 1) / 100)
 
             // If a drop is found, add it to the player's inventory and log a message
             if (drop) {

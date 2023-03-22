@@ -88,7 +88,7 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useLocalStorage, onKeyUp, onClickOutside } from '@vueuse/core'
 
@@ -110,7 +110,7 @@ import { useAchievements } from './composables/useAchievements'
 import useMining from './composables/useMining'
 import { store } from './data/store'
 
-const { inventory, filter, getFilteredInventory, add, total, remove } = useInventory()
+const { filter, getFilteredInventory, add, total, remove } = useInventory()
 const { mine } = useMining()
 
 const settings = ref({})
@@ -146,7 +146,7 @@ onKeyUp('y', () => {
 })
 // End keybindings
 
-const sell = (itemName) => {
+const sell = (itemName: string) => {
   const sellValue = remove(itemName)
   if (sellValue) {
     gold.add(sellValue)

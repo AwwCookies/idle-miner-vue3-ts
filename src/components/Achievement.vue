@@ -3,11 +3,11 @@
     <div class="achievement">
         <h4>{{ achievement.name }}</h4>
         <p>{{ achievement.description }}</p>
-        <p>{{ achievement.progress() }}</p>
+        <!-- <p>{{ achievement.progress }}</p> -->
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { defineProps } from 'vue'
 const props = defineProps({
     achievement: {

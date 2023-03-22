@@ -1,3 +1,16 @@
+export interface Item {
+  name: string;
+  type: string;
+  chance: number;
+  value: number;
+  icon: string;
+  description: string;
+}
+
+interface modifiers {
+  [key: string]: number;
+}
+
 /**
  * Represents an item object.
  * @typedef {object} ItemObject
@@ -177,7 +190,7 @@ export const items = {
  * @returns {ItemObject} - The item object that matches the specified name.
  * @throws {Error} - If no item with the specified name is found.
  */
-export function getItemByName(name) {
+export function getItemByName(name: String): Item {
     const item = Object.values(items).find(
         item => item.name.toLowerCase().replace(/ |-/g, '_') === name.toLowerCase().replace(/ |-/g, '_')
     );
@@ -192,7 +205,7 @@ export function getItemByName(name) {
  * @param {string} type - The type of the items to look up.
  * @returns {ItemObject[]} - An array of item objects that match the specified type, or an empty array if no matches are found.
  */
-export function getItemsByType(type) {
+export function getItemsByType(type: String): Array<Item> {
     const matchingItems = Object.values(items).filter(
         item => item.type.toLowerCase().replace(/ |-/g, '_') === type.toLowerCase().replace(/ |-/g, '_')
     );
@@ -205,10 +218,10 @@ export function getItemsByType(type) {
  * @returns {ItemObject[]} - An array of item objects that match the specified names.
  * @throws {Error} - If no items with the specified names are found.
  */
-export function getItemsByName(names) {
-    const items = []
+export function getItemsByName(names: Array<String>): Array<Item> {
+    const items: Item[] = []
     names.forEach((name) => {
-        const item = getItemByName(name);
+        const item: Item = getItemByName(name);
         if (!item) {
             throw new Error(`Item '${name}' not found.`);
         }
@@ -223,7 +236,7 @@ export function getItemsByName(names) {
  * @param {object} modifiers - An object containing the modifiers to apply to the item.
  * @returns {ItemObject} - The modified item object.
  */
-function applyModifiers(item, modifiers) {
+function applyModifiers(item: Item, modifiers: modifiers): Item {
     const modifiedItem = { ...item };
     if (modifiers.value) {
         modifiedItem.value += modifiers.value;
@@ -238,7 +251,7 @@ function applyModifiers(item, modifiers) {
  * @param {object} modifiers - An object containing the modifiers to remove from the item.
  * @returns {ItemObject} - The modified item object.
  */
-function removeModifiers(item, modifiers) {
+function removeModifiers(item: Item, modifiers: modifiers): Item {
     const modifiedItem = { ...item };
     if (modifiers.value) {
         modifiedItem.value -= modifiers.value;

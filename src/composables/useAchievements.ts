@@ -1,20 +1,27 @@
 // useAchievement.js
 import { reactive, computed, onMounted } from 'vue'
-import { getAchivements } from '../data/achivements.js'
+import { getAchivements, type Achievement } from '../data/achivements.js'
 
 import useInventory from './useInventory';
 import { useGold } from './useGold';
 import { useStats } from './useStats';
 import { useLogs } from './useLogs';
+import { useTalents } from './useTalents';
 
 const inventory = useInventory()
 const gold = useGold()
 const { stats } = useStats()
 const logs = useLogs()
+const talents = useTalents()
 
+interface AchievementStatus {
+  name: string,
+  description: string,
+  completed: boolean,
+}
 
 export function useAchievements() {
-  const achievements = getAchivements({ inventory, gold, stats, logs })
+  const achievements = getAchivements({ inventory, gold, stats, talents })
 
   const state = reactive({
     completedAchievements: [],
@@ -33,7 +40,7 @@ export function useAchievements() {
       })
     },
     getAchievementsStatus: computed(() => {
-      const status = []
+      const status: Array<AchievementStatus> = []
       achievements.forEach(achievement => {
         status.push({
           name: achievement.name,

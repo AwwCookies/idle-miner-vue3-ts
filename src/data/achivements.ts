@@ -1,7 +1,13 @@
-// achivements.js
+// achivements.ts
+export interface Achievement {
+    name: string;
+    description: string;
+    check: () => boolean;
+    progress: () => string;
+}
 // Description: This file contains the list of all achivements in the game.
 export function getAchivements({inventory, stats, talents, gold}) {
-    const achivements = [
+    const achivements: Array<Achievement> = [
         {
             name: "Example Achievement",
             description: "Example description",
