@@ -6,14 +6,25 @@ export interface stat {
   value: number,
 }
 
-const stats = reactive({
+type Stats = {
+  general: {
+    goldPerSecond: number;
+    luck: number;
+    treasureChestsFound: number;
+    lifetimeGold: number;
+  };
+  [key: string]: any;
+};
+
+const stats: Stats = reactive({
   general: {
     goldPerSecond: 0,
     luck: 0,
     treasureChestsFound: 0,
     lifetimeGold: 0,
   }
-})
+});
+
 
 export function useStats() {
   function addStat(statName: string, amount: number) {
@@ -30,7 +41,7 @@ export function useStats() {
 
   function updateStat(name: string, stat: string, value: number) {
       if (!stats[name]) {
-          addNode(name)
+          addNode(name, {})
       }
       stats[name][stat] = value
   }

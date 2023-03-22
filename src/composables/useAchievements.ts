@@ -23,7 +23,8 @@ interface AchievementStatus {
 export function useAchievements() {
   const achievements = getAchivements({ inventory, gold, stats, talents })
 
-  const state = reactive({
+  //TODO:  don't use any type; use a type that describes the state
+  const state: any = reactive({
     completedAchievements: [],
     getCompleted: computed(() => {
       return state.completedAchievements

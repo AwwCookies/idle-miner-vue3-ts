@@ -1,8 +1,15 @@
 // useTalents.js
 import { ref } from 'vue';
 
-const talentPoints = ref(0);
-const learnedTalents = ref([]);
+export interface Talent {
+  id: number;
+  name: string;
+  description: string;
+  cost: number;
+}
+
+const talentPoints = ref<number>(0);
+const learnedTalents = ref<Array<Talent>>([]);
 
 export function useTalents() {
   const talents = ref([
@@ -13,11 +20,14 @@ export function useTalents() {
     { id: 5, name: 'Crafting', description: 'Craft items faster', cost: 5 },
   ]);
 
-  function learnTalent(id) {
+  function learnTalent(id: number) {
     const talent = talents.value.find((talent) => talent.id === id);
-
-    if (talentPoints.value >= talent.cost && !learnedTalents.value.includes(talent.id)) {
-      learnedTalents.value.push(talent.id);
+    if (!talent) {
+      console.log(`Talent not found: ${id}`);
+      return;
+    }
+    if (talentPoints.value >= talent.cost && !talents.value.find((talent) => talent.id === id)) {
+      learnedTalents.value.push(talent);
       talentPoints.value -= talent.cost;
       console.log(`Learned talent: ${talent.name}`);
     }
