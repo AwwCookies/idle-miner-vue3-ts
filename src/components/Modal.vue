@@ -6,7 +6,7 @@
     </div>
   </template>
   
-  <script setup land="ts">
+  <script setup lang="ts">
   import { ref, computed } from 'vue'
   
   const isVisible = ref(false)
