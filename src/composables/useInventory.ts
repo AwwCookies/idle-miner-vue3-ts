@@ -46,7 +46,7 @@ export default function useInventory() {
   //   return item.value * amount
   // }
 
-  function getAllOfType(type: string): Item[] {
+  function getAllOfType(type: string): InventoryItem[] {
     return inventory.value.filter((item) => item.type.toLowerCase() === type.toLowerCase())
   }
 
@@ -55,11 +55,11 @@ export default function useInventory() {
     return itemsOfType.reduce((total, item) => total + item.amount, 0)
   }
 
-  const getInventory: ComputedRef<Item[]> = computed(() => {
+  const getInventory: ComputedRef<InventoryItem[]> = computed(() => {
     return inventory.value
   })
 
-  const getFilteredInventory: ComputedRef<Item[]> = computed(() => {
+  const getFilteredInventory: ComputedRef<InventoryItem[]> = computed(() => {
     if (!filter.value) { return inventory.value }
     return inventory.value.filter((item) => item.name.toLowerCase().includes(filter.value.toLowerCase()))
   })

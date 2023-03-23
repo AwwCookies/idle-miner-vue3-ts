@@ -118,7 +118,7 @@ const shop = ref({})
 const gold = useGold()
 const logs = useLogs()
 const stats = useStats()
-const talents = useTalents(stats)
+const talents = useTalents()
 const achievements = useAchievements()
 
 const modalRef = ref(null)

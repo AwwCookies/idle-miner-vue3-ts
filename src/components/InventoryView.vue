@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import useInventory from '../composables/useInventory';
 const {filter, getFilteredInventory} = useInventory()
