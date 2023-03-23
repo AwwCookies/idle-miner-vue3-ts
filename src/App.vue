@@ -21,7 +21,7 @@
       <!-- header -->
       <header>
         <h1>Idle Miner</h1>
-        <h2>🪙Gold: {{ gold.get() }}</h2>
+        <h2>🪙Gold: {{ goldTweened.number.toFixed(0) }}</h2>
       </header>
       <!-- end header -->
 
@@ -89,7 +89,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, reactive } from 'vue'
+import gsap from 'gsap'
 import { useLocalStorage, onKeyUp, onClickOutside } from '@vueuse/core'
 
 import InventoryView from './components/InventoryView.vue'
@@ -129,6 +130,14 @@ watch(achievements.getCompleted, (Achievements) => {
   console.log(`You have completed ${Achievements.length} Achievements!`)
   console.log(Achievements)
 })
+
+// gold animation
+const goldTweened = reactive({number: 0})
+
+watch(gold.gold, (n) => {
+  gsap.to(goldTweened, { duration: 0.5, number: Number(n) || 0 })
+})
+// end gold animation
 
 onClickOutside(modalRef, () => {
   showModal.value = false

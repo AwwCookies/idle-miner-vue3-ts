@@ -1,9 +1,9 @@
 <template>
   <div>
-    <ul>
+    <ul> <!-- first indent -->
       <li v-for="(cat, index) in Object.keys(stats)" :key="index">
         <h4>{{ cat }}</h4>
-        <ul>
+        <ul> <!-- second indent -->
           <li v-for="(value, key) in stats[cat]" :key="key">{{ key }}: {{ value }}</li>
         </ul>
       </li>

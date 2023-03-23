@@ -1,5 +1,6 @@
 // useTalents.ts
 import { ref } from 'vue';
+import { useLocalStorage } from '@vueuse/core';
 
 export interface Talent {
   id: number;
@@ -8,9 +9,8 @@ export interface Talent {
   cost: number;
 }
 
-const talentPoints = ref<number>(0);
-const learnedTalents = ref<Array<Talent>>([]);
-
+const talentPoints = useLocalStorage('talentPoints', 0)
+const learnedTalents = useLocalStorage('learnedTalents', [] as Array<Talent>)
 export function useTalents() {
   const talents = ref([
     { id: 1, name: 'Mining', description: 'Mine resources faster', cost: 1 },
@@ -28,7 +28,11 @@ export function useTalents() {
     }
     if (talentPoints.value >= talent.cost && !talents.value.find((talent) => talent.id === id)) {
       learnedTalents.value.push(talent);
-      talentPoints.value -= talent.cost;
+      if (talentPoints.value) {
+        talentPoints.value -= talent.cost;
+      } else {
+        talentPoints.value = 0;
+      }
       console.log(`Learned talent: ${talent.name}`);
     }
   }

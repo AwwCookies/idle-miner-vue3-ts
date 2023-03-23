@@ -1,7 +1,8 @@
 // useGold.ts
 import { ref, computed, onMounted } from 'vue'
+import { useLocalStorage } from '@vueuse/core'
 
-const gold = ref<number>(0)
+const gold = useLocalStorage('gold', 0)
 
 export function useGold() {
   const lastUpdated = ref<number>(Date.now())
@@ -10,13 +11,21 @@ export function useGold() {
 
   function add(amount: number): void {
     if (amount > 0) {
-      gold.value += amount
+      if (gold.value) {
+        gold.value += amount
+      } else {
+        gold.value = amount
+      }
     }
   }
 
   function remove(amount: number): void {
     if (amount > 0 && amount <= gold.value) {
-      gold.value -= amount
+      if (gold.value) {
+        gold.value -= amount
+      } else {
+        gold.value = 0
+      } 
     }
   }
 

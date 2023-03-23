@@ -1,5 +1,6 @@
 // useInventory.ts
 import { ref, computed } from 'vue'
+import { useLocalStorage } from '@vueuse/core'
 import type { ComputedRef } from 'vue'
 import type { Item } from '@/items/items'
 
@@ -7,8 +8,8 @@ export interface InventoryItem extends Item {
   amount: number
 }
 
-const inventory = ref<InventoryItem[]>([])
-const filter = ref<string>('')
+const inventory = useLocalStorage('inventory', [] as InventoryItem[])
+const filter = useLocalStorage('inventoryFilter', '')
 
 export default function useInventory() {
   const total: ComputedRef<number> = computed(() => inventory.value.length)
