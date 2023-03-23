@@ -1,4 +1,14 @@
-export type ItemType = 'ore' | 'gem' | 'treasure' | 'weapon' | 'armor' | 'tool' | 'consumable' | 'misc' | 'artifact';
+export enum ItemType {
+  Ore = 'ore',
+  Gem = 'gem',
+  TreasureChest = 'treasureChest',
+  Weapon = 'weapon',
+  Armor = 'armor',
+  Tool = 'tool',
+  Consumable = 'consumable',
+  Misc = 'misc',
+  Artifact = 'artifact'
+}
 
 export interface Item {
   name: string;
@@ -10,7 +20,7 @@ export interface Item {
 }
 
 export interface Items {
-  [key: string]: Item
+  [key: string]: Item;
 }
 
 interface modifiers {
@@ -26,13 +36,13 @@ type ItemName = keyof typeof items;
  * @property {number} value - The value of the item, in units of currency.
  * @property {string} icon - The URL of the item's icon image.
  * @property {string} description - A description of the item.
- * @property {string} name - The name of the item.
- * @property {string} type - The type of the item.
+ * @property {ItemName} name - The name of the item.
+ * @property {ItemType} type - The type of the item.
  */
-export const items: Items = {
+export const items = {
   copperOre: {
     name: 'Copper Ore',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 15,
     value: 8,
     icon: 'ore:copper',
@@ -40,7 +50,7 @@ export const items: Items = {
   },
   goldOre: {
     name: 'Gold Ore',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 10,
     value: 20,
     icon: 'ore:gold',
@@ -48,7 +58,7 @@ export const items: Items = {
   },
   silverOre: {
     name: 'Silver Ore',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 10,
     value: 15,
     icon: 'ore:silver',
@@ -56,7 +66,7 @@ export const items: Items = {
   },
   coal: {
     name: 'Coal',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 20,
     value: 2,
     icon: 'ore:steel',
@@ -64,7 +74,7 @@ export const items: Items = {
   },
   ironOre: {
     name: 'Iron Ore',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 20,
     value: 5,
     icon: 'ore:iron',
@@ -72,7 +82,7 @@ export const items: Items = {
   },
   fossil: {
     name: 'Fossil',
-    type: 'misc',
+    type: ItemType.Misc,
     chance: 10,
     value: 10,
     icon: 'misc:feather_red',
@@ -80,7 +90,7 @@ export const items: Items = {
   },
   onyx: {
     name: 'Onyx',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 10,
     value: 5,
     icon: 'gem:onyx',
@@ -88,7 +98,7 @@ export const items: Items = {
   },
   amethyst: {
     name: 'Amethyst',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 5,
     value: 15,
     icon: 'gem:amethyst',
@@ -96,7 +106,7 @@ export const items: Items = {
   },
   topaz: {
     name: 'Topaz',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 5,
     value: 15,
     icon: 'gem:topaz',
@@ -104,7 +114,7 @@ export const items: Items = {
   },
   diamond: {
     name: 'Diamond',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 5,
     value: 100,
     icon: 'gem:diamond',
@@ -112,7 +122,7 @@ export const items: Items = {
   },
   ruby: {
     name: 'Ruby',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 3,
     value: 150,
     icon: 'gem:ruby',
@@ -120,7 +130,7 @@ export const items: Items = {
   },
   emerald: {
     name: 'Emerald',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 3,
     value: 150,
     icon: 'gem:emerald',
@@ -128,7 +138,7 @@ export const items: Items = {
   },
   sapphire: {
     name: 'Sapphire',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 3,
     value: 150,
     icon: 'gem:sapphire',
@@ -136,7 +146,7 @@ export const items: Items = {
   },
   platinum: {
     name: 'Platinum',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 5,
     value: 50,
     icon: 'ore:platinum',
@@ -144,7 +154,7 @@ export const items: Items = {
   },
   aquamarine: {
     name: 'Aquamarine',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 5,
     value: 50,
     icon: 'gem:aquamarine',
@@ -152,7 +162,7 @@ export const items: Items = {
   },
   garnet: {
     name: 'Garnet',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 3,
     value: 100,
     icon: 'gem:garnet',
@@ -160,7 +170,7 @@ export const items: Items = {
   },
   morganite: {
     name: 'Morganite',
-    type: 'gem',
+    type: ItemType.Gem,
     chance: 3,
     value: 100,
     icon: 'gem:morganite',
@@ -168,7 +178,7 @@ export const items: Items = {
   },
   geode: {
     name: 'Geode',
-    type: 'ore',
+    type: ItemType.Ore,
     chance: 5,
     value: 25,
     icon: 'misc:geode',
@@ -176,7 +186,7 @@ export const items: Items = {
   },
   artifact: {
     name: 'Artifact',
-    type: 'artifact',
+    type: ItemType.Artifact,
     chance: 3,
     value: 75,
     icon: 'misc:dragon_eye',
@@ -184,7 +194,7 @@ export const items: Items = {
   },
   treasureChest: {
     name: 'Treasure Chest',
-    type: 'treasure',
+    type: ItemType.TreasureChest,
     chance: 1,
     value: 1000,
     icon: 'misc:treasure_chest',
@@ -198,8 +208,12 @@ export const items: Items = {
  * Returns the item object that matches the specified name, regardless of case.
  * @param {ItemName} name - The name of the item to look up.
  * @returns {Item} - The item object that matches the specified name.
+ * @throws {Error} - If no item with the specified name is found.
  */
 export function getItemByName(name: ItemName): Item {
+  if (!items[name]) {
+    throw new Error(`Item '${name}' not found.`);
+  }
   return items[name];
 }
 
@@ -263,7 +277,6 @@ function removeModifiers(item: Item, modifiers: modifiers): Item {
   // Add more modifier logic here for other properties as needed.
   return modifiedItem;
 }
-
 
 // function replaceIconData(items) {
 //     const newItems = {};
