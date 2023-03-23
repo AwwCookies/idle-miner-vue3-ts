@@ -6,7 +6,8 @@ export interface Achievement {
     progress: () => string;
 }
 // Description: This file contains the list of all achivements in the game.
-export function getAchivements({inventory, stats, talents, gold}) {
+//TODO: replace any with the correct type
+export function getAchivements({inventory, stats, talents, gold}: any) {
     const achivements: Array<Achievement> = [
         {
             name: "Example Achievement",

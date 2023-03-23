@@ -1,65 +1,71 @@
-// useAchievement.js
-import { reactive, computed, onMounted } from 'vue'
-import { getAchivements, type Achievement } from '../data/achivements.js'
-
+// useAchievements.ts
+import { ref, computed, onMounted } from 'vue';
+import { getAchivements, type Achievement } from '../data/achivements.js';
 import useInventory from './useInventory';
 import { useGold } from './useGold';
 import { useStats } from './useStats';
 import { useLogs } from './useLogs';
 import { useTalents } from './useTalents';
 
-const inventory = useInventory()
-const gold = useGold()
-const { stats } = useStats()
-const logs = useLogs()
-const talents = useTalents()
-
-interface AchievementStatus {
-  name: string,
-  description: string,
-  completed: boolean,
+export interface AchievementStatus {
+  name: string;
+  description: string;
+  completed: boolean;
 }
 
+const inventory = useInventory();
+const gold = useGold();
+const { stats } = useStats();
+const logs = useLogs();
+const talents = useTalents();
+const achievements = getAchivements({ inventory, gold, stats, talents });
+
 export function useAchievements() {
-  const achievements = getAchivements({ inventory, gold, stats, talents })
+  const completedAchievements = ref<Array<Achievement>>([]);
 
-  //TODO:  don't use any type; use a type that describes the state
-  const state: any = reactive({
-    completedAchievements: [],
-    getCompleted: computed(() => {
-      return state.completedAchievements
-    }),
-    updateAndCheckAchievements: () => {
-      achievements.forEach(achievement => {
-        try {
-          if (!state.completedAchievements.includes(achievement) && achievement.check()) {
-            state.completedAchievements.push(achievement)
-          }
-        } catch (e) {
-          // console.log(e)
+  function updateAndCheckAchievements() {
+    achievements.forEach(achievement => {
+      try {
+        if (!completedAchievements.value.includes(achievement) && achievement.check()) {
+          completedAchievements.value.push(achievement);
         }
-      })
-    },
-    getAchievementsStatus: computed(() => {
-      const status: Array<AchievementStatus> = []
-      achievements.forEach(achievement => {
-        status.push({
-          name: achievement.name,
-          description: achievement.description,
-          completed: state.completedAchievements.includes(achievement),
-        })
-      })
-      return status
-    }),
-  })
+      } catch (e) {
+        // console.log(e)
+      }
+    });
+  }
+  
+  const getCompleted = computed(() => completedAchievements.value);
 
+  const getAchievementsStatus = computed(() => {
+    const status: Array<AchievementStatus> = [];
+    achievements.forEach(achievement => {
+      status.push({
+        name: achievement.name,
+        description: achievement.description,
+        completed: completedAchievements.value.includes(achievement),
+      });
+    });
+    return status;
+  });
+
+  const getAchievementsCompletedTotal = computed(() => completedAchievements.value.length);
+
+
+  const getAchievementsTotal = computed(() => achievements.length);
 
   onMounted(() => {
-    state.updateAndCheckAchievements()
+    updateAndCheckAchievements();
     setInterval(() => {
-      state.updateAndCheckAchievements()
-    }, 1000)
-  })
+      updateAndCheckAchievements();
+    }, 1000);
+  });
 
-  return state
+  return {
+    achievements,
+    getCompleted,
+    getAchievementsStatus,
+    getAchievementsCompletedTotal,
+    getAchievementsTotal,
+  };
 }

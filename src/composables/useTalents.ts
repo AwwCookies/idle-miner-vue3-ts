@@ -1,4 +1,4 @@
-// useTalents.js
+// useTalents.ts
 import { ref } from 'vue';
 
 export interface Talent {

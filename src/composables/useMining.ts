@@ -1,4 +1,4 @@
-// useMining.js
+// useMining.ts
 import { ref, computed, watch } from 'vue'
 import { common, uncommon, rare, legendary } from '../data/drop-tables/mining'
 import useInventory from './useInventory';
@@ -52,7 +52,7 @@ export default function useMining() {
                 // inventory.add(drop)
                 add(drop)
             }
-        }
+        } // end for loop
 
         // Increment the player's gold by the base amount plus their gold per second rate
         gold.add(1)
