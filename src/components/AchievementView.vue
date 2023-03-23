@@ -16,6 +16,7 @@ const { getCompleted } = useAchievements()
 <style scoped>
 .achievements {
   width: 500px;
-  min-height: 300px;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 </style>

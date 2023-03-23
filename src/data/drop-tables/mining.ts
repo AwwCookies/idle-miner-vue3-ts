@@ -1,33 +1,33 @@
 import { getItemByName, getItemsByName } from "@/items/items";
 
 export const common = getItemsByName([
-    "Copper Ore",
-    "Gold Ore",
-    "Silver Ore",
-    "Coal",
-    "Iron Ore"
+    "copperOre",
+    "goldOre",
+    "silverOre",
+    "coal",
+    "ironOre"
 ])
 
 export const uncommon = getItemsByName([
-    "Fossil",
-    "Onyx",
-    "Amethyst",
-    "Topaz"
+    "fossil",
+    "onyx",
+    "amethyst",
+    "topaz",
 ])
 
 export const rare = getItemsByName([
-    "Diamond",
-    "Ruby",
-    "Emerald",
-    "Sapphire",
-    "Platinum",
-    "Aquamarine",
-    "Garnet",
-    "Morganite",
-    "Geode",
-    "Artifact"
+    "diamond",
+    "ruby",
+    "emerald",
+    "sapphire",
+    "platinum",
+    "aquamarine",
+    "garnet",
+    "morganite",
+    "geode",
+    "artifact",
 ])
 
 export const legendary = [
-    getItemByName("Treasure Chest")
+    getItemByName("treasureChest")
 ]

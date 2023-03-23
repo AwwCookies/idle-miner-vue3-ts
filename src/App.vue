@@ -212,7 +212,6 @@ ul {
   padding: 10px;
   border-radius: 5px;
   max-height: 500px;
-  overflow-y: scroll;
 }
 
 /* debug */

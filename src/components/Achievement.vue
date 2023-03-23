@@ -3,7 +3,7 @@
     <div class="achievement">
         <h4>{{ achievement.name }}</h4>
         <p>{{ achievement.description }}</p>
-        <!-- <p>{{ achievement.progress }}</p> -->
+        <p>{{ achievement.progress() }}</p>
     </div>
 </template>
 

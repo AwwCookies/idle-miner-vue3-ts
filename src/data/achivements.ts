@@ -257,5 +257,13 @@ export function getAchivements({inventory, stats, talents, gold}: any) {
         }
     ]
 
+    // for (let i = 0; i < 100; i++) {
+    //     achivements.push({
+    //         name: "Placeholder",
+    //         description: "Placeholder",
+    //         check: () => true,
+    //         progress: () => `Not Implemented`,
+    //     })
+    // }
     return achivements;
 }
