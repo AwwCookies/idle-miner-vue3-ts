@@ -1,4 +1,7 @@
 // useAchievements.ts
+
+//TODO: find a way to save state to local storage
+
 import { ref, computed, onMounted } from 'vue';
 import { getAchivements, type Achievement } from '../data/achivements.js';
 import useInventory from './useInventory';
@@ -6,6 +9,7 @@ import { useGold } from './useGold';
 import { useStats } from './useStats';
 import { useLogs } from './useLogs';
 import { useTalents } from './useTalents';
+import { useLocalStorage } from '@vueuse/core';
 
 export interface AchievementStatus {
   name: string;
@@ -22,6 +26,8 @@ const achievements = getAchivements({ inventory, gold, stats, talents });
 
 export function useAchievements() {
   const completedAchievements = ref<Array<Achievement>>([]);
+  //TODO: this needs to store IDs of achivements instead of the whole object
+  // const completedAchievements = useLocalStorage('completedAchievements', [] as Array<Achievement>)
 
   function updateAndCheckAchievements() {
     achievements.forEach(achievement => {
@@ -50,8 +56,6 @@ export function useAchievements() {
   });
 
   const getAchievementsCompletedTotal = computed(() => completedAchievements.value.length);
-
-
   const getAchievementsTotal = computed(() => achievements.length);
 
   onMounted(() => {
